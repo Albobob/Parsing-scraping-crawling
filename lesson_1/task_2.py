@@ -8,7 +8,7 @@ method = 'wall.get'
 
 token = '3c55da6c3c55da6c3c55da6c113c2d115333c553c55da6c5d53a344af10c64e3b8feaa8'
 api_v = 5.131
-domain = 'hsboard'
+domain = str(input('Введите короткий адрес пользователя или сообщества...   '))
 count = 100
 
 response = requests.get(f'{api}{method}',
