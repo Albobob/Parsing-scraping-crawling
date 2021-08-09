@@ -8,8 +8,8 @@ import  save_csv
 
 data_vacancy = []
 
-# search_text = input('')
-search_text = 'врач косметолог'
+search_text = input('')
+
 
 tld = 'https://hh.ru'  # TDL - top level domain
 sld = '/search/vacancy'  # SLD - second level domain
