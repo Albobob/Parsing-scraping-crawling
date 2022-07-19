@@ -6,9 +6,13 @@ tld = 'https://mosgorzdrav.ru'  # TDL - top level domain
 sld = '/ru-RU/citizens/medical.html'  # SLD - second level domain
 
 medical_type = 1
+
 page = 1
+page_all = []
+
 per = 10
-page_all = 0
+metro_id = 0
+district_id=0
 
 headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
@@ -21,6 +25,7 @@ def html():
         'medical_type': f'{medical_type}',
         'p': f'{page}',
         'per': f'{per}',
+        'metro_id': f'{metro_id}',
     }
     # Запрос + получение HTML
     response = requests.get(tld + sld, params=params, headers=headers)
@@ -40,7 +45,7 @@ def item(sp, class_html):
 
 data = []
 
-while page <= 2:
+while page <= 5:
     sp = html()
     medical_main = item(sp, 'medical-main')
     for itm in medical_main:
@@ -62,13 +67,23 @@ while page <= 2:
             url = itm.find("div", attrs={'class': f'med-site'})
             url_1 = url.find("p")
             url_2 = url.find("a").get('href')
-            bd['url'] = url_2
+            bd['url'] = url_2.strip()
         except AttributeError:
             bd['url'] = None
 
+        try:
+            phone = itm.find("div", attrs={'class': f'med-phone'}).getText()
+            bd['phone'] = phone.strip()
+        except AttributeError:
+            bd['phone'] = None
 
         data.append(bd)
 
     page += 1
 
-pprint(data)
+for i in data:
+    name = i['name']
+    mail = i['mail']
+    url = i['url']
+    phone = i['phone']
+    print(f'{name};{mail};{phone};{url}')
