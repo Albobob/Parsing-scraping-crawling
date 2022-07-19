@@ -12,7 +12,8 @@ page_all = []
 
 per = 10
 metro_id = 0
-district_id=0
+district_id = 1
+district_all = 12
 
 headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
@@ -26,6 +27,7 @@ def html():
         'p': f'{page}',
         'per': f'{per}',
         'metro_id': f'{metro_id}',
+        'district_id': f'{district_id}',
     }
     # Запрос + получение HTML
     response = requests.get(tld + sld, params=params, headers=headers)
@@ -42,6 +44,17 @@ def item(sp, class_html):
     # l = list(map(lambda x: x.strip(), ls))
     return item
 
+
+# Всего 12 округов
+# Узнаем сколько страниц в округе
+def page_all_ds():
+    html()
+
+    pass
+
+
+while district_id <= district_all:
+    pass
 
 data = []
 
