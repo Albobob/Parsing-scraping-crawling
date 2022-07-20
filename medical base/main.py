@@ -47,14 +47,41 @@ def item(sp, class_html):
 
 # Всего 12 округов
 # Узнаем сколько страниц в округе
-def page_all_ds():
-    html()
+def button_pg_next():
+    """
+    Проверяет наличие кнопки Далее на странице
+    :return:Возвращает
+    1 - на странице есть кнопка next
+    0 - кнопкки next нет на странице
+    """
+    ls = []
+    ls.clear()
 
-    pass
+    # district_id = ds_id
 
+    sp = html()
+    page_box = item(sp, 'pages')
+    for itm in page_box:
+        page_list = itm.find("ul", attrs={'class': f'pag-list'})
+        try:
+            next = page_list.find(attrs={'class': f'pag pag-next'})
+            ls.append(next)
+        except AttributeError:
+            ls.clear()
+    return len(ls)
 
-while district_id <= district_all:
-    pass
+# def next_page (next_btn):
+#
+#     page = 1
+#     while next_btn == 1:
+#
+#         page += 1
+#
+#     return page
+# while district_id <= district_all:
+#     print(button_pg_next())
+#
+#     district_id += 1
 
 data = []
 
@@ -89,6 +116,8 @@ while page <= 5:
             bd['phone'] = phone.strip()
         except AttributeError:
             bd['phone'] = None
+
+
 
         data.append(bd)
 
